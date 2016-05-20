@@ -8,8 +8,8 @@ guesses = 8
 
 
 def welcome():
-    print("The computer has picked a secret word. {}: ".format(secret_word))
-    print("The word has {} letters.".format(len(secret_word)))
+    print("The computer picked a secret word with {} letters.".format(len(secret_word)))
+    # print(secret_word)
 
 
 def draw_word():
@@ -26,17 +26,9 @@ def draw_word():
         sys.exit()
 
 
-def winner():  # this part definitely not working
-    if '_' not in draw_word():
-    # del(win_tracker[0])
-    # if "_" not in secret_word:
-        print("Wow. You did it. Congrats.")
-
-
-#secret_word_split = list(secret_word)
 bad_guesses = []
 good_guesses = []
-total_guesses = [] # bonus if i can eliminate need for this
+total_guesses = []
 
 welcome()
 while guesses > 0:
