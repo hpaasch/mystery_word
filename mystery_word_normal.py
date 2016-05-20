@@ -1,9 +1,9 @@
 import random
+import sys
 
 get_words = open("/usr/share/dict/words")
 word_list = list(get_words.read().upper().split("\n"))
 secret_word = random.choice(word_list)
-win_tracker = list('_' * len(secret_word)) # maybe use this to track by deleting. multiple letters?
 guesses = 8
 
 
@@ -13,11 +13,17 @@ def welcome():
 
 
 def draw_word():
+    win_tracker = 0
     for letter in secret_word:
         if letter not in good_guesses:
             print('_ ', end='')
+            win_tracker += 1
         else:
             print(letter + ' ', end='')
+    if win_tracker == 0:
+        print("")
+        print("Wow. You did it. Congrats.")
+        sys.exit()
 
 
 def winner():  # this part definitely not working
@@ -34,9 +40,9 @@ total_guesses = [] # bonus if i can eliminate need for this
 
 welcome()
 while guesses > 0:
-    print("\n")
+    print("")
     draw_word()
-    print("\n")
+    print("")
     letter_guess = input("Remaining strikes: {}. Pick a letter: ".format(guesses)).upper()
     if letter_guess in total_guesses:
         print("Uh, you already guessed that letter.")
