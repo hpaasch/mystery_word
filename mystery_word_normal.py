@@ -9,7 +9,7 @@ guesses = 8
 
 def welcome():
     print("The computer picked a secret word with {} letters.".format(len(secret_word)))
-    # print(secret_word)
+    print(secret_word)
 
 
 def draw_word():
