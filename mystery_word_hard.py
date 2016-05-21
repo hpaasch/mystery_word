@@ -8,28 +8,23 @@ word_list_easy = []
 word_list_normal = []
 word_list_hard = []
 for word in word_list:
-    if len(word) == 4 or len(word) == 5 or len(word) == 6:
+    if len(word) == 4 or len(word) == 5 or len(word) == 6:  # can this be done another way? 4-6
         word_list_easy.append(word)
     if len(word) == 7 or len(word) == 8 or len(word) == 9:
         word_list_normal.append(word)
     if len(word) > 9:
         word_list_hard.append(word)
 
-# secret_word = random.choice(word_list)
 secret_word = ()
-guesses = 8
+#bad_guesses = []
+good_guesses = []
+#total_guesses = []
 
-# os.system('clear') will clear the screen to play again
-
-# play_again = input("Play again? Y/n ").lower()
-# if play_again != 'n':
-    # return play(done=False)
-# else:
-    # sys.exit()
 
 def game_start():
     global secret_word
     game_level = int(input("Enter 1 for Easy, 2 for Normal or 3 for Hard version of the game. "))
+    # os.system('cls' if os.name == 'nt' else 'clear') # only works in Terminal, not in IDE
     if game_level == 1:
         secret_word = random.choice(word_list_easy)
     if game_level == 2:
@@ -38,7 +33,6 @@ def game_start():
         secret_word = random.choice(word_list_hard)
     return secret_word
 
-# def user_guess(): BUILD THIS move code from the game loop into function
 
 def draw_word():
     win_tracker = 0
@@ -51,48 +45,65 @@ def draw_word():
     if win_tracker == 0:
         print("")
         print("Wow. You did it. Congrats.")
-        # BUILD THIS add loop that asks user whether they want to restart the game
+        replay()
+
+
+def replay():
+    play_again = input("Want to play again? Y/n ").lower()
+    if play_again != 'n':
+        # os.system('clear')
+        print("Glad you're up for another go at Magical Mystery Word.")
+        print("_" * 40, "\n")
+        play()
+        # print("gonna figure out how to restart")
+        # return play(done=False)
+    else:
+        print("Sorry to see you go. Have a nice day!")
         sys.exit()
 
 
-bad_guesses = []
-good_guesses = []
-total_guesses = []
+def play():
+    bad_guesses = []
+    global good_guesses
+    good_guesses = []
+    total_guesses = []
 
-game_start()
-print("The computer picked a secret word with {} letters.".format(len(secret_word)))
-print(secret_word)
-while guesses > 0:
-    print("")
-    draw_word()
-    print("")
-    # user_guess starts here
-    while True:
-        letter_guess = input("Remaining strikes: {}. Pick a letter: ".format(guesses)).upper()
-        if len(letter_guess) == 0:
-            print("Nothing was entered.")
-        elif not letter_guess.isalpha():
-            print("That's not a letter.")
-        elif len(letter_guess) > 1:
-            print("More than one letter was entered. Pick only one letter at a time.")
+    game_start()
+    print("The computer picked a secret word with {} letters.".format(len(secret_word)))
+    print(secret_word)
+    guesses = 8
+    while guesses > 0:
+        print("")
+        draw_word()
+        print("")
+        while True:
+            letter_guess = input("Remaining strikes: {}. Pick a letter: ".format(guesses)).upper()
+            if len(letter_guess) == 0:
+                print("Nothing was entered.")
+            elif not letter_guess.isalpha():
+                print("That's not a letter.")
+            elif len(letter_guess) > 1:
+                print("More than one letter was entered. Pick only one letter at a time.")
+            else:
+                break
+        if letter_guess in total_guesses:
+            print("Uh, you already guessed that letter.")
+            continue
+        if letter_guess in secret_word:
+            total_guesses.append(letter_guess)
+            good_guesses.append(letter_guess)
+            print("Good guess.")
+            print("Incorrect guesses: {}.".format(bad_guesses))
         else:
-            break
-    if letter_guess in total_guesses:
-        print("Uh, you already guessed that letter.")
-        continue
-    if letter_guess in secret_word:
-        total_guesses.append(letter_guess)
-        good_guesses.append(letter_guess)
-        print("Good guess.")
-        print("Incorrect guesses: {}.".format(bad_guesses))
+            total_guesses.append(letter_guess)
+            bad_guesses.append(letter_guess)
+            guesses -= 1
+            print("\nAnd that's a miss.")
+            print("Incorrect guesses: {}.".format(bad_guesses))
     else:
-        total_guesses.append(letter_guess)
-        bad_guesses.append(letter_guess)
-        guesses -= 1
-        print("\nAnd that's a miss.")
-        print("Incorrect guesses: {}.".format(bad_guesses))
-    # user_guess to here
-else:
-    print("You're out of strikes. You lose. The word was {}.".format(secret_word))
+        print("You're out of strikes. You lose. The word was {}.".format(secret_word))
+        replay()
+
+play()
 
 get_words.close()
