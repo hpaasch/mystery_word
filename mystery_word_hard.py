@@ -54,7 +54,8 @@ def draw_word():
             print(letter + ' ', end='')
     if win_tracker == 0:
         print("")
-        print("Wow. You did it. Congrats.")
+        print("\n>>>WOW! You did it! That's great!")
+        print("_" * 40)
         replay()
 
 
@@ -65,7 +66,7 @@ def replay():
         print("_" * 40, "\n")
         play()
     else:
-        print("Sorry to see you go. Have a nice day!")
+        print("Thanks for playing! Have a nice day.")
         sys.exit()
 
 
@@ -80,7 +81,6 @@ def play():
     # print(secret_word)
     guesses = 8
     while guesses > 0:
-        # print("")
         draw_word()
         print("")
         while True:
@@ -94,22 +94,25 @@ def play():
             else:
                 break
         if letter_guess in total_guesses:
-            print("Hmmm. Getting tired? You already guessed that letter.")
+            print("\n>>>Hmmm. Getting tired? You already guessed that letter.")
+            print("_" * 40)
             print("\nIncorrect guesses: {}.".format(bad_guesses))
             continue
         if letter_guess in secret_word:
             total_guesses.append(letter_guess)
             good_guesses.append(letter_guess)
-            print("Yay! You got one right. Keep going.")
+            print("\n>>>YAY! You got one right. Keep going.")
+            print("_" * 40)
             print("\nIncorrect guesses: {}.".format(bad_guesses))
         else:
             total_guesses.append(letter_guess)
             bad_guesses.append(letter_guess)
             guesses -= 1
-            print("And that's a miss.")
+            print("\n>>>Sorry, that's a miss.")
+            print("_" * 40)
             print("\nIncorrect guesses: {}.".format(bad_guesses))
     else:
-        print("You're out of strikes. You lose. The word was {}.".format(secret_word))
+        print("\n>>>You're out of guesses. The word was {}.".format(secret_word))
         replay()
 
 play()
