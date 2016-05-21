@@ -7,9 +7,9 @@ word_list_easy = []
 word_list_normal = []
 word_list_hard = []
 for word in word_list:
-    if len(word) == 4:
+    if len(word) == 4 or len(word) == 5 or len(word) == 6:
         word_list_easy.append(word)
-    if len(word) == 6:
+    if len(word) == 7 or len(word) == 8 or len(word) == 9:
         word_list_normal.append(word)
     if len(word) > 9:
         word_list_hard.append(word)
@@ -29,14 +29,8 @@ def game_start():
     if game_level == 3:
         secret_word = random.choice(word_list_hard)
     return secret_word
-    #print("The computer picked a secret word with {} letters.".format(len(secret_word)))
-    # print(secret_word)
-    # Easy 4-6 words. Normal 6-10 words. Hard more than 10 words.
-
-
 
 # def user_guess(): BUILD THIS move code from the game loop into function
-
 
 def draw_word():
     win_tracker = 0
@@ -59,7 +53,7 @@ total_guesses = []
 
 game_start()
 print("The computer picked a secret word with {} letters.".format(len(secret_word)))
-print(secret_word)
+# print(secret_word)
 while guesses > 0:
     print("")
     draw_word()
