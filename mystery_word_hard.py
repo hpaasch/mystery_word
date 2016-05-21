@@ -16,22 +16,32 @@ for word in word_list:
         word_list_hard.append(word)
 
 secret_word = ()
-#bad_guesses = []
 good_guesses = []
-#total_guesses = []
 
 
 def game_start():
     global secret_word
-    game_level = int(input("Enter 1 for Easy, 2 for Normal or 3 for Hard version of the game. "))
-    # os.system('cls' if os.name == 'nt' else 'clear') # only works in Terminal, not in IDE
-    if game_level == 1:
+    game_level = ()
+    print("You're about to play the Magical Mystery Word game. Good luck!")
+    while True:
+        game_level = (input("Enter 1 for Easy, 2 for Normal or 3 for Hard version of the game. "))
+        if game_level == "":
+            print("Magical Mystery Word thinks you didn't type just a 1, 2, or 3. Type carefully.")
+        elif game_level not in ['1', '2', '3']:
+            print("Magical Mystery Word thinks you didn't type just a 1, 2, or 3. Type carefully.")
+        else:
+            break
+    if game_level == '1':
         secret_word = random.choice(word_list_easy)
-    if game_level == 2:
+
+    if game_level == '2':
         secret_word = random.choice(word_list_normal)
-    if game_level == 3:
+
+    if game_level == '3':
         secret_word = random.choice(word_list_hard)
+    # os.system('cls' if os.name == 'nt' else 'clear') # only works in Terminal, not in IDE
     return secret_word
+
 
 
 def draw_word():
@@ -51,12 +61,9 @@ def draw_word():
 def replay():
     play_again = input("Want to play again? Y/n ").lower()
     if play_again != 'n':
-        # os.system('clear')
         print("Glad you're up for another go at Magical Mystery Word.")
         print("_" * 40, "\n")
         play()
-        # print("gonna figure out how to restart")
-        # return play(done=False)
     else:
         print("Sorry to see you go. Have a nice day!")
         sys.exit()
