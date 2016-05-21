@@ -1,5 +1,6 @@
 import random
 import sys
+import os
 
 get_words = open("/usr/share/dict/words")
 word_list = list(get_words.read().upper().split("\n"))
@@ -18,6 +19,13 @@ for word in word_list:
 secret_word = ()
 guesses = 8
 
+# os.system('clear') will clear the screen to play again
+
+# play_again = input("Play again? Y/n ").lower()
+# if play_again != 'n':
+    # return play(done=False)
+# else:
+    # sys.exit()
 
 def game_start():
     global secret_word
@@ -53,7 +61,7 @@ total_guesses = []
 
 game_start()
 print("The computer picked a secret word with {} letters.".format(len(secret_word)))
-# print(secret_word)
+print(secret_word)
 while guesses > 0:
     print("")
     draw_word()
