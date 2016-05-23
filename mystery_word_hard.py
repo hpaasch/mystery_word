@@ -1,6 +1,6 @@
 import random
 import sys
-import os
+# import os >>> i'd like to use clear screen, but i gather that doesn't work in an IDE, only in terminal.
 
 get_words = open("/usr/share/dict/words")
 word_list = list(get_words.read().upper().split("\n"))
@@ -8,7 +8,7 @@ word_list_easy = []
 word_list_normal = []
 word_list_hard = []
 for word in word_list:
-    if len(word) == 4 or len(word) == 5 or len(word) == 6:  # can this be done another way? 4-6
+    if len(word) == 4 or len(word) == 5 or len(word) == 6:
         word_list_easy.append(word)
     if len(word) == 7 or len(word) == 8 or len(word) == 9:
         word_list_normal.append(word)
@@ -34,13 +34,11 @@ def game_start():
             break
     if game_level == '1':
         secret_word = random.choice(word_list_easy)
-
     if game_level == '2':
         secret_word = random.choice(word_list_normal)
-
     if game_level == '3':
         secret_word = random.choice(word_list_hard)
-    # os.system('cls' if os.name == 'nt' else 'clear') # only works in Terminal, not in IDE
+    # os.system('cls' if os.name == 'nt' else 'clear') # >>> only works in Terminal, not in IDE
     return secret_word
 
 
@@ -78,7 +76,7 @@ def play():
 
     game_start()
     print("\nMagical Mystery Word picked a word with {} letters. Try to figure it out.".format(len(secret_word)))
-    # print(secret_word)
+    # print(secret_word)  >>> use this for testing.
     guesses = 8
     while guesses > 0:
         draw_word()

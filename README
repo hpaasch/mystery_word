@@ -1,5 +1,3 @@
-mystery_word_hard.py is definitely the more refined version of the game.
-
 mystery_word_normal.py is the Normal Mode of the homework assignment. This is
 a simple game in which the player picks one letter at a time, trying to figure out
 what word the computer has chosen. The computer's word choice is represented
@@ -11,9 +9,3 @@ mystery_word_hard.py is the Hard Mode of the assignment. This version of the
 game allows the player to pick the difficulty level, verifies the player's input,
 and then gives the player a choice of playing again. The player stands a better
 chance of winning this game, though even Easy Mode is still pretty tough to win.
-
-Things I still should do:
-A. Revisit the normal version to pull more of it into functions.
-B. Move Hard Mode functions to a separate text.
-C. And, ha, then I can use the functions to make both the Normal mode AND the
-      Hard mode.
